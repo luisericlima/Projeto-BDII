@@ -91,7 +91,7 @@ BEGIN
 END //
 DELIMITER ;
 
--- Adiciona uma nova categoria a ser combinada com o produto, sendo obrigatório sua criação
+-- Adiciona uma nova categoria que vai ser combinada com o produto, sendo obrigatório sua criação
 DELIMITER //
 CREATE PROCEDURE adicionar_categoria(
     IN nome_categoria VARCHAR(100)
@@ -114,7 +114,7 @@ BEGIN
 END //
 DELIMITER ;
 
--- Adiciona um novo produto na tabela produto
+-- Cria um novo produto na tabela produto
 DELIMITER //
 CREATE PROCEDURE adicionar_produto(
     IN categoria_id INT,
@@ -152,7 +152,7 @@ CREATE PROCEDURE deletar_produto(
     IN produto_id_parametro INT
 )
 BEGIN
-	-- Desabilita o modo de atualização segura 
+	-- Desabilita o modo de atualização segura, importante, se não não conseguimos fazer esse delete
 	SET SQL_SAFE_UPDATES = 0; 
 
     DELETE FROM vendas WHERE produto_id = produto_id_parametro;
@@ -197,7 +197,7 @@ END //
 
 DELIMITER ;
 
-
+-- Chamada das Procedures
 CALL adicionar_categoria('Eletrodomésticos');
 CALL adicionar_cliente('Ana', '123.456.789-00', 'ana@teste.com', '51997882342');
 CALL adicionar_produto(1, 'Geladeira', 5, 1999.99);
